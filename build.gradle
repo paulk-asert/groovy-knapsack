@@ -1,0 +1,34 @@
+plugins {
+    id 'com.github.ben-manes.versions' version '0.51.0'
+    id 'groovy'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.apache.groovy:groovy:5.0.0-alpha-5"
+    implementation "org.choco-solver:choco-solver:4.10.14"
+    implementation "com.google.ortools:ortools-java:9.8.3296"
+
+}
+
+def runall = tasks.register('runAll') {
+    group 'Application'
+}
+
+sourceSets.main.allSource.files.each { file ->
+    def name = "${file.parentFile.name}.${file.name - '.groovy'}"
+    def subtask = tasks.register("run_$name", JavaExec) {
+        dependsOn compileGroovy
+        group 'Application'
+        description "Run $file.name as a JVM application/Groovy script"
+        classpath = sourceSets.main.runtimeClasspath
+        mainClass = name
+    }
+    runall.configure {
+        dependsOn subtask
+    }
+}
