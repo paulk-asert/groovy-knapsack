@@ -1,5 +1,7 @@
 package dynamic
 
+import static java.lang.Math.max
+
 int solve(int[] v, int[] w, int W) {
     knapsack(new Integer[v.length][W+1], v, w, W, 0)
 }
@@ -13,7 +15,7 @@ int knapsack(Integer[][] dp, int[] v, int[] w, int W, int n) {
     }
     int value1 = w[n] > W ? 0 : v[n] + knapsack(dp, v, w, W - w[n], n + 1)
     int value2 = knapsack(dp, v, w, W, n + 1)
-    dp[n][W] = [value1, value2].max()
+    dp[n][W] = max(value1, value2)
 }
 
 int[] values = [1, 5, 10, 15, 17]  // Gem values
