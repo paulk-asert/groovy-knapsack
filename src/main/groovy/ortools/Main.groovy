@@ -15,7 +15,7 @@ long[] capacities = [10]
 solver.init(values, weights, capacities)
 
 long computedValue = solver.solve()
-println "Total value = " + computedValue
+println "Total value for capacity ${capacities[0]} = " + computedValue
 
 var packedItems = []
 var packedWeights = []
@@ -27,6 +27,6 @@ values.indices.each { i ->
         totalWeight += weights[0][i]
     }
 }
-println "Total weight: $totalWeight"
-println "Packed items: $packedItems"
-println "Packed weights: $packedWeights"
+println "Actual weight: $totalWeight"
+println "Gems taken: $packedItems"
+println "Gem weights: $packedWeights"

@@ -20,4 +20,4 @@ while (remaining && ratios) {
 }
 var total = taken.collect{ index, qty -> values[index] * qty }.sum()
 println taken
-printf 'Total value = %6.3f%n', total
+printf 'Total value for capacity %d (with fractions) = %6.3f%n', W, total
