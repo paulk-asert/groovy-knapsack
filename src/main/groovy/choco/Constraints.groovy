@@ -13,13 +13,13 @@ var total
 var found = false
 
 new Model('KnapsackProblem').with {
-    counts.indices.each {counts[it] = intVar("count$it", 0, W) }
+    counts.indices.each { counts[it] = intVar("count$it", 0, W) }
     scalar(counts, weights, '<=', W).post()
     total = intVar("Total value for capacity $W (unbounded)", 0, unbounded)
     scalar(counts, values, '=', total).post()
     setObjective(MAXIMIZE, total)
 
-    while(solver.solve()) {
+    while (solver.solve()) {
         found = true
         println "$total, $counts"
     }
