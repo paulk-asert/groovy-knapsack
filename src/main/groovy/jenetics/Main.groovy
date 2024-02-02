@@ -32,7 +32,7 @@ class Knapsack implements Problem<ISeq<Item>, BitGene, Integer> {
     @Override
     Function<ISeq<Item>, Integer> fitness() {
         (items) -> {
-            var sum = items.iterator().inject(new Item(0, 0)) { acc, next ->
+            var sum = items.inject(new Item(0, 0)) { acc, next ->
                 new Item(acc.weight + next.weight, acc.value + next.value)
             }
             sum.weight <= knapsackSize ? sum.value : 0
