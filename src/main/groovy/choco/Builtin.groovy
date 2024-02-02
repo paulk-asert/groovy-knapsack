@@ -10,19 +10,18 @@ int unbounded = 100000
 
 var counts = new IntVar[values.length]
 var totalWeight, totalValue
+var found = false
 
-var found = new Model('KnapsackProblem').with {
+new Model('KnapsackProblem').with {
     counts.indices.each {counts[it] = intVar("count$it", 0, W) }
     totalValue = intVar("Total value for capacity $W (unbounded)", 0, unbounded)
     totalWeight = intVar("Total weight taken", 0, W)
     knapsack(counts, totalWeight, totalValue, weights, values).post()
     setObjective(MAXIMIZE, totalValue)
-    solver.solve()
+
+    while(solver.solve()) {
+        found = true
+        println "$totalValue, $totalWeight, $counts"
+    }
 }
-if (found) {
-    println counts
-    println totalWeight
-    println totalValue
-} else {
-    println 'No solution'
-}
+if (!found) println 'No solution'
