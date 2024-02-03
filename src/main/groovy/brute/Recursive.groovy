@@ -6,7 +6,6 @@ int solve(int[] w, int[] v, int W) {
 
 // knapsack call count 107 plain / 49 memoized
 int knapsack(int[] w, int[] v, int n, int W) {
-    println "$n $W"
     if (n <= 0) {
         0
     } else if (w[n - 1] > W) {
@@ -19,7 +18,7 @@ int knapsack(int[] w, int[] v, int n, int W) {
 
 int[] values = [1, 5, 10, 15, 17]  // Gem values
 int[] weights = [1, 2, 3, 5, 6]    // Weights
-[/*6, 8,*/ 10].each {
+[6, 8, 10].each {
     println "Total value for capacity $it = ${solve(weights, values, it)}"
 }
 
