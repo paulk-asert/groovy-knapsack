@@ -24,4 +24,3 @@ int[] weights = [1, 2, 3, 5, 6]    // Weights
 [6, 8, 10].each {
     println "Total value for capacity $it = ${solve(weights, values, it)}"
 }
-
