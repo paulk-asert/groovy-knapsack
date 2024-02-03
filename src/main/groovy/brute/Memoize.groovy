@@ -1,10 +1,13 @@
 package brute
 
+import groovy.transform.Memoized
+
 int solve(int[] w, int[] v, int W) {
     knapsack(w, v, v.length, W)
 }
 
 // knapsack call count 107 plain / 49 memoized
+@Memoized
 int knapsack(int[] w, int[] v, int n, int W) {
     println "$n $W"
     if (n <= 0) {
