@@ -7,7 +7,7 @@ var N = weights.size()
 var maskW = 1L << W
 var nums = 0L..<(1L << N)
 var totalValue = nums
-    .collect{ BitSet.valueOf([it] as Long[]) }
+    .collect{ BitSet.valueOf(it) }
     .findAll{ mask -> mask.stream().reduce(1) {a, b -> a | a << weights[b] } & maskW }
     .findAll{ mask -> mask.stream().map(idx -> weights[idx]).reduce(0, Integer::sum) <= W }
     .collect{ mask -> nums.indices.sum{ idx -> mask[idx] ? values[idx] : 0 } }
